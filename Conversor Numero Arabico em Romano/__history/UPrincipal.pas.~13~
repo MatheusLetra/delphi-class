@@ -1,0 +1,62 @@
+unit UPrincipal;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, UConversor;
+
+type
+  TfrmPrincipal = class(TForm)
+    edNumero: TEdit;
+    edRomano: TEdit;
+    btnApagar: TButton;
+    btnConverter: TButton;
+    procedure btnConverterClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure btnApagarClick(Sender: TObject);
+  private
+    { Private declarations }
+    Conversor : TConversor;
+    procedure Converter();
+  public
+    { Public declarations }
+  end;
+
+var
+  frmPrincipal: TfrmPrincipal;
+
+implementation
+
+{$R *.dfm}
+
+
+procedure TfrmPrincipal.btnApagarClick(Sender: TObject);
+begin
+  edNumero.Text := '';
+  edRomano.Text := '';
+end;
+
+procedure TfrmPrincipal.btnConverterClick(Sender: TObject);
+begin
+  Converter;
+end;
+
+procedure TfrmPrincipal.Converter;
+begin
+  Conversor.Numero := StrToInt(edNumero.Text);
+  edRomano.Text    := Conversor.Converter();
+end;
+
+procedure TfrmPrincipal.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  Conversor.Destroy;
+end;
+
+procedure TfrmPrincipal.FormCreate(Sender: TObject);
+begin
+  Conversor := TConversor.Create();
+end;
+
+end.

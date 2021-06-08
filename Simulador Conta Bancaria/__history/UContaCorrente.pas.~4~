@@ -1,0 +1,39 @@
+unit UContaCorrente;
+
+interface
+
+type
+  TContaCorrente = class
+
+  private
+    fSaldo : Double;
+  public
+
+    procedure Sacar(Value: Double);
+    procedure Depositar(Value: Double);
+    function ConsultarSaldo() : Double;
+
+  published
+    property Saldo: Double read fSaldo;
+  end;
+
+implementation
+
+{ TContaCorrente }
+
+function TContaCorrente.ConsultarSaldo(): Double;
+begin
+  Result := fSaldo;
+end;
+
+procedure TContaCorrente.Depositar(Value: Double);
+begin
+  fSaldo := fSaldo + Value;
+end;
+
+procedure TContaCorrente.Sacar(Value: Double);
+begin
+  fSaldo := fSaldo - Value;
+end;
+
+end.
